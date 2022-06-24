@@ -64,7 +64,7 @@
         left: 30%;
         padding: 10px;
         border-radius: 10.1px;
-        height: 370px;
+        height: 440px;
         width: 400px;
         margin: 10px;
         position: absolute;
@@ -84,7 +84,7 @@
 
     }
 
-    .clsBotao::selection{
+    .clsBotao::selection {
         background-color: #191b28;
         color: antiquewhite;
 
@@ -105,9 +105,8 @@
 
     #idIgual {
         font-size: 35px;
-    
-    }
 
+    }
 </style>
 
 
@@ -116,19 +115,26 @@
         <h1>Calculadora de Açougue</h1>
         <div class="clsTela" name="nmTela">
             <tr>
-                <td><div class="clsResultado" id="idResultado" name="nmResultado" ></div></td>
+                <td>
+                    <div class="clsResultado" id="idResultado" name="nmResultado" type="number"></div>
+                </td>
             </tr>
 
             <table>
-
+                <tr>
+                    <td><button class="clsBotao" name="nmMemoryStore" onclick="insert('')">MS</button></td>
+                    <td><button class="clsBotao" name="nmMemoryAdd" onclick="insert('')">M+</button></td>
+                    <td><button class="clsBotao" name="nmMemorySubtract" onclick="insert('')">M-</button></td>
+                    <td><button class="clsBotao" name="nmMemoryRecall" onclick="insert('/')">MR</button></td>
+                </tr>
 
                 <tr>
-                    <td><button class="clsBotao" name="nmPorcentagem" onclick="insert('%')">%</button></td>
-                    <td><button class="clsBotao" name="nmBotaoIgual" onclick="insert('clear')">C</button></td>
-                    <td><button class="clsBotao" name="nmExp" onclick="insert('exp(x)')">exp(x)</button></td>
+                    <td><button class="clsBotao" name="nmPorcentagem" onclick="percentage('%')">%</button></td>
+                    <td><button class="clsBotao" id="idLimpar" name="nmBotaoLimpar" onclick="limpar()">C</button></td>
+                    <td><button class="clsBotao" name="nmExp" onclick="potencia('exp(x)')">exp(x)</button></td>
                     <td><button class="clsBotao" id="idDivisao" name="nmDivisao" onclick="insert('/')">÷</button></td>
                 </tr>
-                
+
                 <tr>
                     <td><button class="clsBotao" name="nmBotao7" onclick="insert('7')">7</button></td>
                     <td><button class="clsBotao" name="nmBotao8" onclick="insert('8')">8</button></td>
@@ -147,28 +153,61 @@
                     <td><button class="clsBotao" name="nmBotao1" onclick="insert('1')">1</button></td>
                     <td><button class="clsBotao" name="nmBotao2" onclick="insert('2')">2</button></td>
                     <td><button class="clsBotao" name="nmBotao3" onclick="insert('3')">3</button></td>
-                    <td><button class="clsBotao" id="idSoma" name="nmBotaoSomar" onclick="insert('+')">+</button></td>
+                    <td><button class="clsBotao" id="idSoma" name="nmBotaoSomar" onclick="insert('+')">+</button>
+                    </td>
                 </tr>
 
                 <tr>
-                    <td><button class="clsBotao" name="nmInverso" onclick="insert('1/x')">1/x</button></td>
+                    <td><button class="clsBotao" name="nmInverso" onclick="inverse('1/x')">1/x</button></td>
                     <td><button class="clsBotao" name="nmbotao0" onclick="insert('0')">0</button></td>
                     <td><button class="clsBotao" name="nmbotaoPonto" onclick="insert('.')">.</button></td>
-                    <td><button class="clsBotao" id="idIgual" name="nmbotaoIgual" onclick="insert('')">=</button></td>
+                    <td><button class="clsBotao" id="idIgual" name="nmbotaoIgual" onclick="calcular('')">=</button>
+                    </td>
                 </tr>
-
-            </table>
-
         </div>
-
+        </form>
     </div>
 
     <script>
-        function insert(aux){
+        function insert(aux) {
             let numero = document.getElementById('idResultado').innerHTML;
-            document.getElementById('idResultado').innerHTML = numero + aux;
+            document.getElementById("idResultado").innerHTML = numero + aux;
         }
 
+        function limpar() {
+            document.getElementById("idResultado").innerHTML = "";
+
+        }
+
+        function calcular() {
+            let resultado = document.getElementById('idResultado').innerHTML;
+            if (resultado) {
+                document.getElementById('idResultado').innerHTML = eval(resultado);
+            }
+            else {
+                document.getElementById('idResultado').innerHTML = "Nada aconteçe feijoada"
+            }
+        }
+
+        function inverse() {
+            let resultado = document.getElementById('idResultado').innerHTML;
+            if (resultado) {
+                document.getElementById('idResultado').innerHTML = (-1) * eval(resultado);
+            }
+            else {
+                document.getElementById('idResultado').innerHTML = "Nada aconteçe feijoada"
+            }
+        }
+
+        function potencia() {
+            let resultado = document.getElementById('idResultado').innerHTML;
+            if (resultado) {
+                document.getElementById('idResultado').innerHTML = eval.Math.pow(resultado, 2);
+            }
+            else {
+                document.getElementById('idResultado').innerHTML = "Nada aconteçe feijoada"
+            }
+        }
     </script>
 
 </body>
